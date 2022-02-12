@@ -1,0 +1,397 @@
+{
+	"name": "cpp-library-linker",
+	"displayName": "C++ Library Linker",
+	"description": "This is a library linker for the gcc and MinGW c++ compilers",
+	"galleryBanner": {
+		"color": "#F17772",
+		"theme": "dark"
+	},
+	"version": "0.0.1",
+	"publisher": "NerdTronik",
+	"engines": {
+		"vscode": "^1.50.0"
+	},
+	"readme": "README.md",
+	"license": "SEE LICENSE IN LICENSE.md",
+	"bugs": {
+		"url": "https://github.com/Microsoft/vscode-cpptools/issues",
+		"email": "nerdtronikpay@gmail.com"
+	},
+	"keywords": [
+		"C",
+		"C++",
+		"Library Link",
+		"Library"
+	],
+	"categories": [
+		"Other",
+		"Programming Languages",
+		"Debuggers"
+	],
+	"activationEvents": [
+		"workspaceContains:**/.cpp",
+		"onLanguage:cpp",
+		"onStartupFinished"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "cpp-lib-linker",
+					"title": "C++ Library Linker",
+					"icon": "./media/icon.svg"
+				}
+			]
+		},
+		"views": {
+			"cpp-lib-linker": [
+				{
+					"type": "webview",
+					"id": "cpp-library-linker.principalView",
+					"name": "Compiler Options"
+				},
+				{
+					"id": "cpp-library-linker.includepaths",
+					"name": "Include Paths"
+				},
+				{
+					"id": "cpp-library-linker.libs",
+					"name": "Library Files: RELEASE"
+				},
+				{
+					"id": "cpp-library-linker.libpaths",
+					"name": "Lib Folders: RELEASE"
+				},
+				{
+					"id": "cpp-library-linker.binpaths",
+					"name": "Bin Folders: RELEASE"
+				}
+			]
+		},
+		"commands": [
+			{
+				"command": "_Init",
+				"title": "Init Project",
+				"icon": {
+					"light": "resources/Compile.svg",
+					"dark": "resources/Compile.svg"
+				}
+			},
+			{
+				"command": "_Compile",
+				"title": "Compile",
+				"icon": {
+					"light": "resources/Compile.svg",
+					"dark": "resources/Compile.svg"
+				}
+			},
+			{
+				"command": "_Run",
+				"title": "C++ Run",
+				"icon": {
+					"light": "resources/Run.svg",
+					"dark": "resources/Run.svg"
+				}
+			},
+			{
+				"command": "_Debug",
+				"title": "Actual: DEBUG. Set to RELEASE mode.",
+				"icon": {
+					"light": "resources/light/debug.svg",
+					"dark": "resources/dark/debug.svg"
+				}
+			},
+			{
+				"command": "_Release",
+				"title": "Actual: RELEASE. Set to DEBUG mode.",
+				"icon": {
+					"light": "resources/light/release.svg",
+					"dark": "resources/dark/release.svg"
+				}
+			},
+			{
+				"command": "_refreshLibFiles",
+				"title": "Refresh Lib Files",
+				"icon": {
+					"light": "resources/refresh.svg",
+					"dark": "resources/refresh.svg"
+				}
+			},
+			{
+				"command": "_addLibFile_folder",
+				"title": "Add Library File From Folder",
+				"icon": {
+					"light": "resources/light/add_lib.svg",
+					"dark": "resources/dark/add_lib.svg"
+				}
+			},
+			{
+				"command": "_addLibFile",
+				"title": "Add Library File",
+				"icon": {
+					"light": "resources/light/add.svg",
+					"dark": "resources/dark/add.svg"
+				}
+			},
+			{
+				"command": "_delLibFile",
+				"title": "Remove Library File",
+				"icon": {
+					"light": "resources/del.svg",
+					"dark": "resources/del.svg"
+				}
+			},
+			{
+				"command": "_refreshCompilers",
+				"title": "Refresh compilers list",
+				"icon": {
+					"light": "resources/refresh.svg",
+					"dark": "resources/refresh.svg"
+				}
+			},
+			{
+				"command": "_addLibPath",
+				"title": "Add Library Folder",
+				"icon": {
+					"light": "resources/light/add_folder.svg",
+					"dark": "resources/dark/add_folder.svg"
+				}
+			},
+			{
+				"command": "_delLibPath",
+				"title": "Remove Library Folder",
+				"icon": {
+					"light": "resources/del.svg",
+					"dark": "resources/del.svg"
+				}
+			},
+			{
+				"command": "_addBinPath",
+				"title": "Add Binary Folder",
+				"icon": {
+					"light": "resources/light/add_folder.svg",
+					"dark": "resources/dark/add_folder.svg"
+				}
+			},
+			{
+				"command": "_delBinPath",
+				"title": "Remove Binary Folder",
+				"icon": {
+					"light": "resources/del.svg",
+					"dark": "resources/del.svg"
+				}
+			},
+			{
+				"command": "_addIncludePath",
+				"title": "Add Include Folder",
+				"icon": {
+					"light": "resources/light/add_folder.svg",
+					"dark": "resources/dark/add_folder.svg"
+				}
+			},
+			{
+				"command": "_delIncludePath",
+				"title": "Remove Include Folder",
+				"icon": {
+					"light": "resources/del.svg",
+					"dark": "resources/del.svg"
+				}
+			},
+			{
+				"command": "_switchAll",
+				"title": "Architecture",
+				"icon": {
+					"light": "resources/all.svg",
+					"dark": "resources/all.svg"
+				}
+			},
+			{
+				"command": "_switchx64",
+				"title": "Architecture",
+				"icon": {
+					"light": "resources/64-bit.svg",
+					"dark": "resources/64-bit.svg"
+				}
+			},
+			{
+				"command": "_switchx86",
+				"title": "Architecture",
+				"icon": {
+					"light": "resources/32-bit.svg",
+					"dark": "resources/32-bit.svg"
+				}
+			},
+			{
+				"title": "Enable CodeLens - On Code Run",
+				"command": "_enableCodeLensOnCode",
+				"category": "CodeLens Sample"
+			},
+			{
+				"title": "Disable Codelens - On Code Run",
+				"command": "_disableCodeLensOnCode",
+				"category": "CodeLens Sample"
+			}
+		],
+		"menus": {
+			"editor/title": [
+				{
+					"command": "_refreshLibFiles",
+					"when": "view == cpp-library-linker.libs",
+					"group": "navigation"
+				}
+			],
+			"commandPalette": [
+				{
+					"command": "_refreshLibFiles",
+					"when": "view == cpp-library-linker.libs"
+				}
+			],
+			"view/title": [
+				{
+					"command": "_refreshLibFiles",
+					"when": "view == cpp-library-linker.libs",
+					"group": "navigation"
+				},
+				{
+					"command": "_addLibFile",
+					"when": "view == cpp-library-linker.libs",
+					"group": "navigation"
+				},
+				{
+					"command": "_addLibFile_folder",
+					"when": "view == cpp-library-linker.libs",
+					"group": "navigation"
+				},
+				{
+					"command": "_Run",
+					"when": "view == cpp-lib-linker",
+					"group": "navigation"
+				},
+				{
+					"command": "_Debug",
+					"when": "view == cpp-library-linker.principalView && cpp-library-linker:showDebug==true",
+					"group": "navigation"
+				},
+				{
+					"command": "_Release",
+					"when": "view == cpp-library-linker.principalView && cpp-library-linker:showDebug==false",
+					"group": "navigation"
+				},
+				{
+					"command": "_refreshCompilers",
+					"when": "view == cpp-library-linker.principalView",
+					"group": "navigation"
+				},
+				{
+					"command": "_addIncludePath",
+					"when": "view == cpp-library-linker.includepaths",
+					"group": "navigation"
+				},
+				{
+					"command": "_addLibPath",
+					"when": "view == cpp-library-linker.libpaths",
+					"group": "navigation"
+				},
+				{
+					"command": "_addBinPath",
+					"when": "view == cpp-library-linker.binpaths",
+					"group": "navigation"
+				}
+			],
+			"view/item/context": [
+				{
+					"command": "_delLibFile",
+					"when": "view == cpp-library-linker.libs",
+					"group": "inline"
+				},
+				{
+					"command": "_switchAll",
+					"when": "viewItem == ALL",
+					"group": "inline"
+				},
+				{
+					"command": "_switchx86",
+					"when": "viewItem == x86",
+					"group": "inline"
+				},
+				{
+					"command": "_switchx64",
+					"when": "viewItem == x64",
+					"group": "inline"
+				},
+				{
+					"command": "_delLibPath",
+					"when": "view == cpp-library-linker.libpaths",
+					"group": "inline"
+				},
+				{
+					"command": "_delBinPath",
+					"when": "view == cpp-library-linker.binpaths",
+					"group": "inline"
+				},
+				{
+					"command": "_delIncludePath",
+					"when": "view==cpp-library-linker.includepaths",
+					"group": "inline"
+				}
+			]
+		},
+		"viewsWelcome": [
+			{
+				"view": "cpp-library-linker.libs",
+				"contents": "No library files added.\n[Add Library File](command:_addLibFile)\n[Add From Folder](command:_addLibFile_folder)",
+				"when": "cpp-library-linker:showLibs==true"
+			},
+			{
+				"view": "cpp-library-linker.libpaths",
+				"contents": "No library folders added.\n[Add Library Folder](command:_addLibPath)",
+				"when": "cpp-library-linker:showLibPaths==true"
+			},
+			{
+				"view": "cpp-library-linker.binpaths",
+				"contents": "No binary folders added.\n[Add Binary Folder](command:_addBinPath)",
+				"when": "cpp-library-linker:showBinPaths==true"
+			},
+			{
+				"view": "cpp-library-linker.includepaths",
+				"contents": "No include folders added (workspace folder and subfolders added by default).\n[Add Include Folders](command:_addIncludePath)",
+				"when": "cpp-library-linker:showIncludes==true"
+			}
+		],
+		"configuration": {
+			"properties": {
+				"cpp-library-linker.enableCodeLens-RunOnCode": {
+					"type": "boolean",
+					"default": true
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint src --ext ts",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.50.0",
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.0.0",
+		"@types/node": "^12.11.7",
+		"eslint": "^7.9.0",
+		"@typescript-eslint/eslint-plugin": "^4.1.1",
+		"@typescript-eslint/parser": "^4.1.1",
+		"glob": "^7.1.6",
+		"mocha": "^8.1.3",
+		"typescript": "^4.0.2",
+		"vscode-test": "^1.4.0"
+	},
+	"dependencies": {
+		"chokidar": "^3.4.3",
+		"line-reader": "^0.4.0",
+		"slash": "^3.0.0"
+	}
+}
